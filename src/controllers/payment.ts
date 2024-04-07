@@ -11,6 +11,20 @@ export const createPaymentIntent = TryCatch(async (req, res, next) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: Number(amount) * 100,
     currency: "inr",
+    metadata: {
+      company: "Ecommerce",
+    },
+    description: 'Software development services',
+    shipping: {
+      name: 'Jenny Rosen',
+      address: {
+        line1: '510 Townsend St',
+        postal_code: '98140',
+        city: 'San Francisco',
+        state: 'CA',
+        country: 'US',
+      },
+    },
   });
 
   return res.status(201).json({
